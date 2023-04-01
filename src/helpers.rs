@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
-use magic_wormhole::{Code, transfer, transit, Wormhole};
+use magic_wormhole::{Code, transfer, transit, Wormhole, AppConfig, rendezvous::DEFAULT_RENDEZVOUS_SERVER};
 
 
 pub async fn send(file: web_sys::File) {
@@ -49,10 +49,10 @@ fn gen_relay_hints() -> Vec<transit::RelayHint> {
     }
     relay_hints
 }
-pub fn gen_app_config() -> magic_wormhole::AppConfig<transfer::AppVersion> {
-    magic_wormhole::AppConfig {
+pub fn gen_app_config() -> AppConfig<transfer::AppVersion> {
+    AppConfig {
         id: transfer::APPID,
-        rendezvous_url: Cow::from(magic_wormhole::rendezvous::DEFAULT_RENDEZVOUS_SERVER),
+        rendezvous_url: Cow::from(DEFAULT_RENDEZVOUS_SERVER),
         app_version: transfer::AppVersion {},
     }
 }

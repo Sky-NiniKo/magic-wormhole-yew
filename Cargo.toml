@@ -14,6 +14,9 @@ log = "0.4.6"
 wasm-logger = "0.2.0"
 wasm-bindgen-futures = "0.4.34"
 
+# Temporary until this is fix in magic-wormhole
+rand = { version = "0.7", features = ["wasm-bindgen"] }
+
 [profile.release]
 opt-level = 'z'     # Optimize for size.
 lto = true          # Enable Link Time Optimization
