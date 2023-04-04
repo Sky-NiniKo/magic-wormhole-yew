@@ -4,6 +4,7 @@ use yew::{html, Component, Context, Html, events::Event, TargetCast};
 use web_sys::{HtmlInputElement, File};
 use wasm_bindgen_futures::spawn_local;
 
+#[derive(Debug)]
 pub enum Msg {
     Files(Event),
     Receive(Event),

@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
-use magic_wormhole::{Code, transfer, transit, Wormhole, AppConfig, rendezvous::DEFAULT_RENDEZVOUS_SERVER};
+use magic_wormhole::{Code, transfer, transit, Wormhole, AppConfig};
 
 
 pub async fn send(file: web_sys::File) {
@@ -43,7 +43,7 @@ fn gen_relay_hints() -> Vec<transit::RelayHint> {
     let mut relay_hints: Vec<transit::RelayHint> = vec![];
     if relay_hints.is_empty() {
         relay_hints.push(
-            transit::RelayHint::from_urls(None, [transit::DEFAULT_RELAY_SERVER.parse().unwrap()])
+            transit::RelayHint::from_urls(None, ["wss://relay.mw.leastauthority.com".parse().unwrap()])
                 .unwrap(),
         )
     }
@@ -52,7 +52,7 @@ fn gen_relay_hints() -> Vec<transit::RelayHint> {
 pub fn gen_app_config() -> AppConfig<transfer::AppVersion> {
     AppConfig {
         id: transfer::APPID,
-        rendezvous_url: Cow::from(DEFAULT_RENDEZVOUS_SERVER),
+        rendezvous_url: Cow::from("wss://mailbox.mw.leastauthority.com/v1"),
         app_version: transfer::AppVersion {},
     }
 }
